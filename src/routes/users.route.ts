@@ -8,9 +8,16 @@ const usersRoute = Router();
 // put /users/:uuid
 // delete /users/:uuid
 
-usersRoute.get("/", (req: Request, res: Response, next: NextFunction) => {
+usersRoute.get("/users", (req: Request, res: Response, next: NextFunction) => {
 	const users = [{ userName: "Samuel" }];
 	res.status(200).send(users);
 });
+
+usersRoute.get(
+	"/users/:uuid",
+	(req: Request, res: Response, next: NextFunction) => {
+		res.sendStatus(200);
+	}
+);
 
 export default usersRoute;
