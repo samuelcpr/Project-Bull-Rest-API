@@ -1,9 +1,12 @@
 import express, { NextFunction, Request, Response } from "express";
+import usersRoute from "./routes/users.route";
 
 const app = express();
 
-app.get("/", (req: Request, res: Response, next: NextFunction) => {
-	res.status(200).json({ foo: "sucesso total!" });
+app.use(usersRoute);
+
+app.get("/users", (req: Request, res: Response, next: NextFunction) => {
+	res.status(200).send({ foo: "sucesso total!" });
 });
 
 app.listen(3333, () => {
