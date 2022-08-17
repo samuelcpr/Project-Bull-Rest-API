@@ -42,7 +42,9 @@ usersRoute.put(
 
 usersRoute.delete(
 	"/users/:uuid",
-	(req: Request, res: Response, next: NextFunction) => {}
+	(req: Request, res: Response, next: NextFunction) => {
+		res.sendStatus(statusCode.OK);
+	}
 );
 
 export default usersRoute;
