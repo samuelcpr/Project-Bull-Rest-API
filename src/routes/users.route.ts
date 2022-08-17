@@ -1,4 +1,5 @@
 import { NextFunction, Request, response, Response, Router } from "express";
+import statusCode from "http-status-codes";
 
 const usersRoute = Router();
 
@@ -10,7 +11,7 @@ const usersRoute = Router();
 
 usersRoute.get("/users", (req: Request, res: Response, next: NextFunction) => {
 	const users = [{ userName: "Samuel" }];
-	res.status(200).send(users);
+	res.status(statusCode.OK).send(users);
 });
 
 usersRoute.get(
@@ -19,6 +20,29 @@ usersRoute.get(
 		const uuid = req.params.uuid;
 		res.status(200).send({ uuid });
 	}
+);
+usersRoute.post("/users", (req: Request, res: Response, next: NextFunction) => {
+	const newUser = req.body;
+
+	console.log(req.body);
+	res.status(statusCode.CREATED).send(newUser);
+});
+
+usersRoute.put(
+	"/users/:uuid",
+	(req: Request, res: Response, next: NextFunction) => {
+		const uuid = req.params.uuid;
+		const modifiedUser = req.body;
+
+		modifiedUser.uuid = uuid;
+		console.log(modifiedUser);
+		res.status(statusCode.OK).send({ modifiedUser });
+	}
+);
+
+usersRoute.delete(
+	"/users/:uuid",
+	(req: Request, res: Response, next: NextFunction) => {}
 );
 
 export default usersRoute;
