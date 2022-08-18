@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
-import ForbiddenError from "../models/errors/forbidden.error.model";
+import User from "models/user.model";
+import ForbiddenError from "../models/erros/forbidden.error.model";
 import userRepository from "../repositories/user.repository";
 
 async function basicAuthenticationMiddleware(
@@ -37,7 +38,7 @@ async function basicAuthenticationMiddleware(
 			throw new ForbiddenError("Usuário ou senha inválidos!");
 		}
 
-		req.user = user;
+		req.body = user;
 		next();
 	} catch (error) {
 		next(error);
